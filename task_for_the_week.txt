@@ -1,0 +1,13 @@
+TASKS FOR THE DAY 
+
+1. Explore the Data. 
+2. We will use the mean-columns for each sensor. 
+3. Deal with the missing-values according, according to the columns. 
+4. Use the correlation map to see the relevant features. 
+5. We plan to use 4 or 5 features for the training. 
+6. Use four ML models 
+	i.  	Decision Tree
+	ii. 	Random Forest 
+	iii. 	Support Vector Machine (SVM)
+7. Train, test, predict, and check the accuracy of the Model. 
+8. Prepare the Data in a PowerPoint or Streamlit
