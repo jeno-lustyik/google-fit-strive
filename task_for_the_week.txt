@@ -5,7 +5,7 @@ TASKS FOR THE DAY
 3. Deal with the missing-values according, according to the columns. 
 4. Use the correlation map to see the relevant features. 
 5. We plan to use 4 or 5 features for the training. 
-6. Use four ML models 
+6. Use three ML models
 	i.  	Decision Tree
 	ii. 	Random Forest 
 	iii. 	Support Vector Machine (SVM)
