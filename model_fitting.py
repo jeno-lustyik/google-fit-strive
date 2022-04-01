@@ -7,6 +7,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.svm import SVC
 from sklearn.model_selection import GridSearchCV
 from sklearn.model_selection import RandomizedSearchCV
+from sklearn.metrics import confusion_matrix
 
 
 def model_fitting(x_train, x_test, x_val, y_train, y_test, y_val):
@@ -39,7 +40,9 @@ def model_fitting(x_train, x_test, x_val, y_train, y_test, y_val):
     results_ord = results.sort_values(by=['MSE'], ascending=True, ignore_index=True)
     print(results_ord)
     params_svm = {'C': [1, 10, 20, 50, 100], 'kernel': ['rbf', 'linear']}
-    grid_svm = RandomizedSearchCV(SVC(gamma='auto'), params_svm, cv=5, return_train_score=False, n_iter=4)
+    grid_svm = RandomizedSearchCV(SVC(gamma='auto'), params_svm, cv=5, return_train_score=False, n_iter=4, refit='accuracy')
     grid_svm.fit(X_train, y_train)
+    pred = grid_svm.predict(X_test)
+    print(confusion_matrix(y_test, pred))
     results_final = pd.DataFrame(grid_svm.cv_results_)[['param_C', 'param_kernel', 'mean_test_score']]
     return results_final
