@@ -17,7 +17,7 @@ def model_fitting(x_train, x_test, x_val, y_train, y_test, y_val):
 
     classifiers = {
         "Decision Tree": DecisionTreeClassifier(),
-        "SVM": SVC(),
+        "SVM": SVC(gamma='auto', C=20, kernel='rbf'),
         "Random Forest": RandomForestClassifier()}
 
     results = pd.DataFrame({'Model': [], 'MSE': [], 'MAE': [], " % error": [], 'Time': []})
@@ -37,9 +37,9 @@ def model_fitting(x_train, x_test, x_val, y_train, y_test, y_val):
                                  ignore_index=True)
 
     results_ord = results.sort_values(by=['MSE'], ascending=True, ignore_index=True)
-
-    params_svm = {'C': [1,10,20], 'kernel': ['rbf', 'linear']}
+    print(results_ord)
+    params_svm = {'C': [1, 10, 20, 50, 100], 'kernel': ['rbf', 'linear']}
     grid_svm = RandomizedSearchCV(SVC(gamma='auto'), params_svm, cv=5, return_train_score=False, n_iter=4)
     grid_svm.fit(X_train, y_train)
-    grid_svm.best_params_
-    return grid_svm.best_params_
+    results_final = pd.DataFrame(grid_svm.cv_results_)[['param_C', 'param_kernel', 'mean_test_score']]
+    return results_final

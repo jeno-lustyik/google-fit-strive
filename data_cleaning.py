@@ -25,15 +25,17 @@ def data_cleaning(csv_path):
     df_copy = df
 
     df[['target', 'user']] = df_copy[['target', 'user']].astype(int)
-    df_copy[['target', 'user']] = df_copy[['target', 'user']].astype(int)
-
-    # df = df.groupby(['user', 'target']).transform(lambda x: x.fillna(x.mean()))
-
-    df[['target', 'user']] = df_copy[['target', 'user']].astype(int)
-
-    impute = SimpleImputer(missing_values=np.nan, strategy='mean')
-    df = impute.fit_transform(df)
-
-    df = pd.DataFrame(df, columns=df_copy.columns)
-
+    df = df.dropna()
+    # df_copy[['target', 'user']] = df_copy[['target', 'user']].astype(int)
+    #
+    # # df = df.groupby(['user', 'target']).transform(lambda x: x.fillna(x.mean()))
+    #
+    # df[['target', 'user']] = df_copy[['target', 'user']].astype(int)
+    #
+    # impute = SimpleImputer(missing_values=np.nan, strategy='mean')
+    # df = impute.fit_transform(df)
+    #
+    # df = pd.DataFrame(df, columns=df_copy.columns)
+    columns_three = ['android.sensor.linear_acceleration#mean', 'sound#mean', 'speed#mean', 'target', 'user']
+    df = df[columns_three]
     return df
