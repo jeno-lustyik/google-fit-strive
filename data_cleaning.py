@@ -36,6 +36,5 @@ def data_cleaning(csv_path):
     # df = impute.fit_transform(df)
     #
     # df = pd.DataFrame(df, columns=df_copy.columns)
-    columns_three = ['android.sensor.linear_acceleration#mean', 'sound#mean', 'speed#mean', 'target', 'user']
-    df = df[columns_three]
+    columns_three = ['android.sensor.linear_acceleration#mean', 'sound#mean', 'android.sensor.gyroscope#mean', 'target', 'user']
     return df
