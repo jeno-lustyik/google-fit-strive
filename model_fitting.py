@@ -5,6 +5,8 @@ from sklearn import metrics
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.svm import SVC
+from sklearn.model_selection import GridSearchCV
+from sklearn.model_selection import RandomizedSearchCV
 
 
 def model_fitting(x_train, x_test, x_val, y_train, y_test, y_val):
@@ -35,4 +37,9 @@ def model_fitting(x_train, x_test, x_val, y_train, y_test, y_val):
                                  ignore_index=True)
 
     results_ord = results.sort_values(by=['MSE'], ascending=True, ignore_index=True)
-    return results_ord
+
+    params_svm = {'C': [1,10,20], 'kernel': ['rbf', 'linear']}
+    grid_svm = RandomizedSearchCV(SVC(gamma='auto'), params_svm, cv=5, return_train_score=False, n_iter=4)
+    grid_svm.fit(X_train, y_train)
+    grid_svm.best_params_
+    return grid_svm.best_params_

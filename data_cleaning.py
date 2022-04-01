@@ -4,7 +4,7 @@ from sklearn.preprocessing import OrdinalEncoder
 from sklearn.impute import SimpleImputer
 
 
-def clean_data(csv_path):
+def data_cleaning(csv_path):
     df = pd.read_csv(csv_path)
 
     columns = ['activityrecognition#1', 'android.sensor.accelerometer#mean',
