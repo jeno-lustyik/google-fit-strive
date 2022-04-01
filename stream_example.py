@@ -4,9 +4,8 @@ import streamlit as st
 import numpy as np
 import pandas as pd
 from PIL import Image
-import main
-
-
+import plotly.express as px
+import joblib
 
 
 
@@ -91,23 +90,30 @@ st.title('')
 
 
 
-st.write(' ## Selected Classifier : Random Forest')
+st.write(' ## Selected Classifier : SVM')
 st.title('')
 st.title('')
-
 
 st.title('RESULTS AND DISCUSSIONS')
 st.title('')
-st.title('')
-
+st.text('With the tuning of hyperparameters, our model could constantly provide around 80% accuracy.')
 
 
 st.title('CONCLUSION')
 st.write('## In Building the ML Model, the following Conclusion are made')
-st.write('### 1. The Model works best with Random Forest Classifier with accuracy up to c.a. %')
-st.write('### 2. Three/Four Features are enough to achieve this high accuracy')
+st.write('### 1. The Model works best with Random Forest Classifier with accuracy up to 80 %')
+st.write('### 2. Four Features are enough to achieve this high accuracy')
 st.title('')
 st.title('')
+
+model_svm = joblib.load('model.pkl')
+
+gyr = st.number_input('Enter your gyroscope parameters:')
+spd = st.number_input('Enter your speed:')
+vol = st.number_input('Enter the volume of your surroundings:')
+acc = st.number_input('Enter your accelerator parameters:')
+
+st.text(model_svm.predict([[gyr, spd, vol, acc]]))
 
 image10 = Image.open('image10.png')
 st.image(image10)
