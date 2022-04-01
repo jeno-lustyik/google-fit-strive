@@ -11,7 +11,7 @@ from sklearn.metrics import confusion_matrix
 import joblib
 
 
-def model_fitting(x_train, x_test, x_val, y_train, y_test, y_val):
+def model_fitting(x_train, x_test, x_val, y_train, y_test, y_val, x, y):
     scaler = StandardScaler()
     X_train = scaler.fit_transform(x_train)
     X_test = scaler.transform(x_test)
@@ -47,5 +47,6 @@ def model_fitting(x_train, x_test, x_val, y_train, y_test, y_val):
     results_final = pd.DataFrame(grid_svm.cv_results_)[['param_C', 'param_kernel', 'mean_test_score']]
     print(results_final)
     params = grid_svm.best_params_
+    grid_svm.fit(x, y)
     joblib.dump(grid_svm, 'model.pkl')
     return results_final, params

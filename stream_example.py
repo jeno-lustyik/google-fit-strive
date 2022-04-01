@@ -82,11 +82,11 @@ st.title('')
 
 
 
-st.write(' ####  Next, we explore three different classifiers')
-image6 = Image.open('image6.png')
-st.image(image6)
-st.write(' ####  Figure 5. A graph of the Accuracy of three classifiesrs')
-st.title('')
+# st.write(' ####  Next, we explore three different classifiers')
+# image6 = Image.open('image6.png')
+# st.image(image6)
+# st.write(' ####  Figure 5. A graph of the Accuracy of three classifiesrs')
+# st.title('')
 
 
 
@@ -100,20 +100,30 @@ st.text('With the tuning of hyperparameters, our model could constantly provide 
 
 
 st.title('CONCLUSION')
-st.write('## In Building the ML Model, the following Conclusion are made')
-st.write('### 1. The Model works best with Random Forest Classifier with accuracy up to 80 %')
-st.write('### 2. Four Features are enough to achieve this high accuracy')
+st.write('## In Building the ML Model, the following conclusions were made:')
+st.write('### 1. Our model works best with SVC with accuracy of ~80 %')
+st.write('### 2. Four Features were enough to achieve this accuracy')
 st.title('')
 st.title('')
 
 model_svm = joblib.load('model.pkl')
 
-gyr = st.number_input('Enter your gyroscope parameters:')
-spd = st.number_input('Enter your speed:')
-vol = st.number_input('Enter the volume of your surroundings:')
-acc = st.number_input('Enter your accelerator parameters:')
+gyr = st.slider('Enter your gyroscope parameters:', min_value=0, max_value=12)
+spd = st.slider('Enter your speed:', min_value=0, max_value=40)
+vol = st.slider('Enter the volume of your surroundings:', min_value=0, max_value=90)
+acc = st.slider('Enter your accelerator parameters:', min_value=0, max_value=40)
 
-st.text(model_svm.predict([[gyr, spd, vol, acc]]))
+st.subheader('The result:')
+if model_svm.predict([[gyr, spd, vol, acc]]) == 0:
+    st.text('You are travelling by bus.')
+if model_svm.predict([[gyr, spd, vol, acc]]) == 1:
+    st.text('You are travelling by car.')
+if model_svm.predict([[gyr, spd, vol, acc]]) == 2:
+        st.text('You are standing still.')
+if model_svm.predict([[gyr, spd, vol, acc]]) == 3:
+    st.text('You are travelling by train.')
+if model_svm.predict([[gyr, spd, vol, acc]]) == 4:
+    st.text('You are walking.')
 
 image10 = Image.open('image10.png')
 st.image(image10)

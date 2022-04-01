@@ -9,5 +9,7 @@ def data_splitting(df):
     y_test = df_test.target
     x_val = df_val.drop(['user', 'target'], axis=1)
     y_val = df_val.target
+    x = df.drop(['user', 'target'], axis=1)
+    y = df.target
 
-    return x_train, x_test, x_val, y_train, y_test, y_val
+    return x_train, x_test, x_val, y_train, y_test, y_val, x, y
