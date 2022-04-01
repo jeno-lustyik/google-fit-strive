@@ -12,9 +12,9 @@ from sklearn.metrics import confusion_matrix
 
 def model_fitting(x_train, x_test, x_val, y_train, y_test, y_val):
     scaler = StandardScaler()
-    X_train = scaler.fit_transform(x_train)
-    X_test = scaler.transform(x_test)
-    X_val = scaler.transform(x_val)
+    # X_train = scaler.fit_transform(x_train)
+    # X_test = scaler.transform(x_test)
+    # X_val = scaler.transform(x_val)
 
     classifiers = {
         "Decision Tree": DecisionTreeClassifier(),
@@ -25,10 +25,10 @@ def model_fitting(x_train, x_test, x_val, y_train, y_test, y_val):
 
     for model_name, model in classifiers.items():
         start_time = time.time()
-        model.fit(X_train, y_train)
+        model.fit(x_train, y_train)
         total_time = time.time() - start_time
 
-        pred = model.predict(X_test)
+        pred = model.predict(x_test)
 
         results = results.append({"Model": model_name,
                                   "MSE": metrics.mean_squared_error(y_test, pred),
@@ -41,8 +41,7 @@ def model_fitting(x_train, x_test, x_val, y_train, y_test, y_val):
     print(results_ord)
     params_svm = {'C': [1, 10, 20, 50, 100], 'kernel': ['rbf', 'linear']}
     grid_svm = RandomizedSearchCV(SVC(gamma='auto'), params_svm, cv=5, return_train_score=False, n_iter=4, refit='accuracy')
-    grid_svm.fit(X_train, y_train)
-    pred = grid_svm.predict(X_test)
-    print(confusion_matrix(y_test, pred))
+    grid_svm.fit(x_train, y_train)
+    pred = grid_svm.predict(x_test)
     results_final = pd.DataFrame(grid_svm.cv_results_)[['param_C', 'param_kernel', 'mean_test_score']]
     return results_final

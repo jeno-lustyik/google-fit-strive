@@ -26,16 +26,16 @@ def data_cleaning(csv_path):
 
     df[['target', 'user']] = df_copy[['target', 'user']].astype(int)
     df = df.dropna()
-    # df_copy[['target', 'user']] = df_copy[['target', 'user']].astype(int)
-    #
-    # # df = df.groupby(['user', 'target']).transform(lambda x: x.fillna(x.mean()))
-    #
-    # df[['target', 'user']] = df_copy[['target', 'user']].astype(int)
-    #
-    # impute = SimpleImputer(missing_values=np.nan, strategy='mean')
-    # df = impute.fit_transform(df)
-    #
-    # df = pd.DataFrame(df, columns=df_copy.columns)
+    df_copy[['target', 'user']] = df_copy[['target', 'user']].astype(int)
+
+    # df = df.groupby(['user', 'target']).transform(lambda x: x.fillna(x.mean()))
+
+    df[['target', 'user']] = df_copy[['target', 'user']].astype(int)
+
+    impute = SimpleImputer(missing_values=np.nan, strategy='mean')
+    df = impute.fit_transform(df)
+
+    df = pd.DataFrame(df, columns=df_copy.columns)
     columns_three = ['android.sensor.accelerometer#mean', 'sound#mean', 'android.sensor.gyroscope#mean', 'speed#mean', 'target', 'user']
-    df = df[columns_three]
+    df = df[columns]
     return df

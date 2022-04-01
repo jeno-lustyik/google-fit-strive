@@ -4,6 +4,9 @@ import streamlit as st
 import numpy as np
 import pandas as pd
 from PIL import Image
+import main
+
+
 
 
 
@@ -88,7 +91,7 @@ st.title('')
 
 
 
-st.write(' ## Selected Classifier :     Random Forest')
+st.write(' ## Selected Classifier : Random Forest')
 st.title('')
 st.title('')
 
