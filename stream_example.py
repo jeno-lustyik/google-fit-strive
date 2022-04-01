@@ -119,11 +119,11 @@ if model_svm.predict([[gyr, spd, vol, acc]]) == 0:
 if model_svm.predict([[gyr, spd, vol, acc]]) == 1:
     st.text('You are travelling by car.')
 if model_svm.predict([[gyr, spd, vol, acc]]) == 2:
-        st.text('You are standing still.')
+        st.text('You are walking.')
 if model_svm.predict([[gyr, spd, vol, acc]]) == 3:
     st.text('You are travelling by train.')
 if model_svm.predict([[gyr, spd, vol, acc]]) == 4:
-    st.text('You are walking.')
+    st.text('You are standing still.')
 
 image10 = Image.open('image10.png')
 st.image(image10)
