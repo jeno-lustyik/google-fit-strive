@@ -47,6 +47,7 @@ def model_fitting(x_train, x_test, x_val, y_train, y_test, y_val, x, y):
     results_final = pd.DataFrame(grid_svm.cv_results_)[['param_C', 'param_kernel', 'mean_test_score']]
     print(results_final)
     params = grid_svm.best_params_
-    grid_svm.fit(x, y)
-    joblib.dump(grid_svm, 'model.pkl')
+    best_svc = SVC(gamma='auto', kernel='linear', C=100)
+    best_svc.fit(x, y)
+    joblib.dump(best_svc, 'model.pkl')
     return results_final, params
